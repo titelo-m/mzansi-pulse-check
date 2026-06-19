@@ -62,7 +62,7 @@ export const Route = createFileRoute("/api/pulse-ai")({
           const result = streamText({
             model: gateway("google/gemini-3-flash-preview"),
             system: systemPrompt(langName),
-            messages: convertToModelMessages(body.messages),
+            messages: await convertToModelMessages(body.messages),
           });
           return result.toUIMessageStreamResponse();
         } catch (err) {

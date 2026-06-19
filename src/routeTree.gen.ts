@@ -14,6 +14,7 @@ import { Route as PulseCheckRouteImport } from './routes/pulse-check'
 import { Route as LearnRouteImport } from './routes/learn'
 import { Route as FindHelpRouteImport } from './routes/find-help'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPulseAiRouteImport } from './routes/api/pulse-ai'
 
 const StoriesRoute = StoriesRouteImport.update({
   id: '/stories',
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPulseAiRoute = ApiPulseAiRouteImport.update({
+  id: '/api/pulse-ai',
+  path: '/api/pulse-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/learn': typeof LearnRoute
   '/pulse-check': typeof PulseCheckRoute
   '/stories': typeof StoriesRoute
+  '/api/pulse-ai': typeof ApiPulseAiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/learn': typeof LearnRoute
   '/pulse-check': typeof PulseCheckRoute
   '/stories': typeof StoriesRoute
+  '/api/pulse-ai': typeof ApiPulseAiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,33 @@ export interface FileRoutesById {
   '/learn': typeof LearnRoute
   '/pulse-check': typeof PulseCheckRoute
   '/stories': typeof StoriesRoute
+  '/api/pulse-ai': typeof ApiPulseAiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/find-help' | '/learn' | '/pulse-check' | '/stories'
+  fullPaths:
+    | '/'
+    | '/find-help'
+    | '/learn'
+    | '/pulse-check'
+    | '/stories'
+    | '/api/pulse-ai'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/find-help' | '/learn' | '/pulse-check' | '/stories'
-  id: '__root__' | '/' | '/find-help' | '/learn' | '/pulse-check' | '/stories'
+  to:
+    | '/'
+    | '/find-help'
+    | '/learn'
+    | '/pulse-check'
+    | '/stories'
+    | '/api/pulse-ai'
+  id:
+    | '__root__'
+    | '/'
+    | '/find-help'
+    | '/learn'
+    | '/pulse-check'
+    | '/stories'
+    | '/api/pulse-ai'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +105,7 @@ export interface RootRouteChildren {
   LearnRoute: typeof LearnRoute
   PulseCheckRoute: typeof PulseCheckRoute
   StoriesRoute: typeof StoriesRoute
+  ApiPulseAiRoute: typeof ApiPulseAiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/pulse-ai': {
+      id: '/api/pulse-ai'
+      path: '/api/pulse-ai'
+      fullPath: '/api/pulse-ai'
+      preLoaderRoute: typeof ApiPulseAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   LearnRoute: LearnRoute,
   PulseCheckRoute: PulseCheckRoute,
   StoriesRoute: StoriesRoute,
+  ApiPulseAiRoute: ApiPulseAiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
