@@ -16,63 +16,32 @@ export const Route = createFileRoute("/learn")({
   component: Learn,
 });
 
-const SIGN_GROUPS = [
-  {
-    icon: Eye,
-    title: "Physical signs",
-    items: [
-      "Bloodshot or glazed eyes; dilated or pinpoint pupils",
-      "Sudden weight loss or gain",
-      "Poor hygiene, unkempt appearance",
-      "Unusual smells on breath, body or clothes",
-      "Tremors, slurred speech or poor coordination",
-    ],
-  },
-  {
-    icon: Brain,
-    title: "Behavioural signs",
-    items: [
-      "Secrecy, lying, becoming withdrawn",
-      "Sudden change in friends or hangouts",
-      "Loss of interest in school, work or hobbies",
-      "Missing money, medication or valuables",
-      "Sleeping much more or much less than usual",
-    ],
-  },
-  {
-    icon: Users,
-    title: "Emotional signs",
-    items: [
-      "Unexplained mood swings or irritability",
-      "Anxiety, paranoia or fearfulness",
-      "Depression, hopelessness or low motivation",
-      "Sudden defensiveness when asked simple questions",
-      "Loss of motivation for things they once loved",
-    ],
-  },
-];
-
-const MYTHS = [
-  {
-    myth: "It's just a phase — they'll grow out of it.",
-    fact: "Early substance use rewires a developing brain. The earlier you intervene, the better the long-term outcome.",
-  },
-  {
-    myth: "Addiction only happens in poor communities.",
-    fact: "Substance abuse cuts across every income level, race and suburb in South Africa. The face of addiction looks like everyone.",
-  },
-  {
-    myth: "If I talk about drugs, I'll plant the idea.",
-    fact: "The opposite is true. Open conversations with parents are one of the strongest protective factors against substance use.",
-  },
-  {
-    myth: "They have to hit rock bottom before they'll change.",
-    fact: "Waiting for 'rock bottom' costs lives. Early, supportive intervention works — and rock bottom can be fatal.",
-  },
-];
+// Sign groups and myths are built from translations so the whole page can switch language
 
 function Learn() {
   const { t } = useI18n();
+  const SIGN_GROUPS = [
+    {
+      icon: Eye,
+      title: t("learn.physical"),
+      items: Array.from({ length: 5 }, (_, i) => t(`learn.signs.physical.${i + 1}`)),
+    },
+    {
+      icon: Brain,
+      title: t("learn.behavioural"),
+      items: Array.from({ length: 5 }, (_, i) => t(`learn.signs.behavioural.${i + 1}`)),
+    },
+    {
+      icon: Users,
+      title: t("learn.emotional"),
+      items: Array.from({ length: 5 }, (_, i) => t(`learn.signs.emotional.${i + 1}`)),
+    },
+  ];
+
+  const MYTHS = Array.from({ length: 4 }, (_, i) => ({
+    myth: t(`learn.myths.${i + 1}.myth`),
+    fact: t(`learn.myths.${i + 1}.fact`),
+  }));
   return (
     <div className="mx-auto max-w-7xl px-4 py-12">
       <header className="max-w-2xl">
@@ -90,9 +59,7 @@ function Learn() {
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/15 text-primary">
                   <Icon className="h-5 w-5" />
                 </span>
-                <h3 className="mt-4 font-semibold text-foreground">
-                  {g.title === "Physical signs" ? t("learn.physical") : g.title === "Behavioural signs" ? t("learn.behavioural") : t("learn.emotional")}
-                </h3>
+                <h3 className="mt-4 font-semibold text-foreground">{g.title}</h3>
                 <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
                   {g.items.map((it) => (
                     <li key={it} className="flex gap-2">

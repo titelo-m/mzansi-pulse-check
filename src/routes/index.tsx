@@ -10,7 +10,6 @@ import {
   Users,
   Lock,
   Languages,
-  Bot,
   HeartPulse,
   Eye,
   MessageCircle,
@@ -77,13 +76,7 @@ function Index() {
                 {t("hero.cta1")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link
-                to="/pulse-ai"
-                className="inline-flex items-center gap-2 rounded-md border border-primary/40 bg-primary/10 px-5 py-3 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
-              >
-                <Bot className="h-4 w-4" />
-                {t("hero.ai")}
-              </Link>
+              {/* Pulse AI removed */}
               <Link
                 to="/find-help"
                 className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface-elevated"
@@ -111,12 +104,7 @@ function Index() {
             title={t("features.pulseCheck")}
             description={t("features.pulseCheckDesc")}
           />
-          <FeatureCard
-            to="/pulse-ai"
-            icon={<Bot className="h-5 w-5" />}
-            title={t("features.pulseAI")}
-            description={t("features.pulseAIDesc")}
-          />
+          {/* Pulse AI feature removed */}
           <FeatureCard
             to="/find-help"
             icon={<MapPin className="h-5 w-5" />}
